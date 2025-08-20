@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -425,6 +425,10 @@ namespace NotionClone
             if (e.KeyCode == Keys.Enter)
             {
                 int lineIndex = ContentBox.GetLineFromCharIndex(ContentBox.SelectionStart);
+
+                // Add bounds check 
+                if (lineIndex < 0 || lineIndex >= ContentBox.Lines.Length) return;
+
                 string currentLine = ContentBox.Lines[lineIndex];
 
                 if (currentLine.TrimStart().StartsWith(bulletString.TrimStart()))
@@ -463,6 +467,10 @@ namespace NotionClone
             if (index < 0 || index >= ContentBox.Text.Length) return;
 
             int lineIndex = ContentBox.GetLineFromCharIndex(index);
+
+            // Add bounds check 
+            if (lineIndex < 0 || lineIndex >= ContentBox.Lines.Length) return;
+
             int lineStart = ContentBox.GetFirstCharIndexFromLine(lineIndex);
 
             string lineText = ContentBox.Lines[lineIndex];
